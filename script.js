@@ -4,7 +4,7 @@ var ctx = canvas.getContext('2d')
 document.addEventListener('keydown', keyDownHandler, false)
 document.addEventListener('keyup', keyUpHandler, false)
 
-const colors = ['pink', 'hotpink', 'deeppink', 'orchid']
+const colors = ['maroon', 'crimson', 'salmon', 'lightcoral', 'indianred', 'coral']
 var score = 0
 
 var ballRadius = 10
@@ -101,7 +101,7 @@ function keyUpHandler (e) {
 }
 
 function drawBall () {
-  if (colorChoice > colors.length) {
+  if (colorChoice >= colors.length) {
     colorChoice = 0
   }
   ctx.beginPath()
@@ -114,7 +114,7 @@ function drawBall () {
 function drawPaddle () {
   ctx.beginPath()
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight)
-  ctx.fillStyle = 'teal'
+  ctx.fillStyle = 'midnightblue'
   ctx.fill()
   ctx.closePath()
 }
@@ -141,25 +141,38 @@ function draw () {
   } else if (y + dy > canvas.height - ballRadius) {
     // count as paddle hit if any part of ball hits it
     if ((x + ballRadius) > paddleX && (x - ballRadius) < paddleX + paddleWidth) {
-      // hitting paddle is good
+      // hitting paddle is good, but changes your angle
+      console.log("dx: ", dx, "dy:", dy)
+      dx = randomerD(dx)
+      dy = randomerD(dy)
       dy = -dy
       colorChoice += 1
     } else {
-      // hitting floor is not good
+      // hitting floor is not okay
       console.log('GAME OVER')
       document.location.reload()
     }
   }
 
+  // move the paddle
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
     paddleX += 7
   } else if (leftPressed && paddleX > 0) {
     paddleX -= 7
   }
 
+  // move the ball
   x += dx
   y += dy
   requestAnimationFrame(draw)
 }
 
-// draw()
+function randomerD(d){
+    // TODO: make these faster at higher levels
+    const multipliers = [1.25, 1.75, 2, 2.25, 2.75, 3, 3.5]
+    const randomishIndex = Math.floor(Math.random() * (multipliers.length))
+    let newD = multipliers[randomishIndex]
+    // set sign to match sign of current d
+    return newD * Math.sign(d)
+}
+
