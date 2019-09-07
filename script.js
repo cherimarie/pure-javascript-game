@@ -35,14 +35,13 @@ for (var c = 0; c < brickColumnCount; c++) {
   }
 }
 
-var img = new Image();
-img.src = 'shrimp.png';
+var img = new Image()
+img.src = 'shrimp.png'
 
 // ENTRY POINT TO THE ACTION:
 img.onload = function () {
-    draw()
+  draw()
 }
-
 
 function drawBricks () {
   for (var c = 0; c < brickColumnCount; c++) {
@@ -52,7 +51,7 @@ function drawBricks () {
         var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop
         bricks[c][r].x = brickX
         bricks[c][r].y = brickY
-        ctx.drawImage(img, brickX, brickY, brickWidth, brickHeight);
+        ctx.drawImage(img, brickX, brickY, brickWidth, brickHeight)
       }
     }
   }
@@ -142,7 +141,7 @@ function draw () {
     // count as paddle hit if any part of ball hits it
     if ((x + ballRadius) > paddleX && (x - ballRadius) < paddleX + paddleWidth) {
       // hitting paddle is good, but changes your angle
-      console.log("dx: ", dx, "dy:", dy)
+      console.log('dx: ', dx, 'dy:', dy)
       dx = randomerD(dx)
       dy = randomerD(dy)
       dy = -dy
@@ -167,12 +166,11 @@ function draw () {
   requestAnimationFrame(draw)
 }
 
-function randomerD(d){
-    // TODO: make these faster at higher levels
-    const multipliers = [1.25, 1.75, 2, 2.25, 2.75, 3, 3.5]
-    const randomishIndex = Math.floor(Math.random() * (multipliers.length))
-    let newD = multipliers[randomishIndex]
-    // set sign to match sign of current d
-    return newD * Math.sign(d)
+function randomerD (d) {
+  // TODO: make these faster at higher levels
+  const multipliers = [1.25, 1.75, 2, 2.25, 2.75, 3, 3.5]
+  const randomishIndex = Math.floor(Math.random() * (multipliers.length))
+  const newD = multipliers[randomishIndex]
+  // set sign to match sign of current d
+  return newD * Math.sign(d)
 }
-
