@@ -1,6 +1,11 @@
 var canvas = document.getElementById('myCanvas')
 var ctx = canvas.getContext('2d')
+
+document.addEventListener('keydown', keyDownHandler, false)
+document.addEventListener('keyup', keyUpHandler, false)
+
 const colors = ['pink', 'hotpink', 'deeppink', 'orchid']
+var score = 0
 
 var ballRadius = 10
 var x = canvas.width / 2
@@ -15,13 +20,13 @@ var paddleX = (canvas.width - paddleWidth) / 2
 var rightPressed = false
 var leftPressed = false
 
-var brickRowCount = 3
+var brickRowCount = 2
 var brickColumnCount = 5
-var brickWidth = 75
-var brickHeight = 20
-var brickPadding = 10
+var brickWidth = 50
+var brickHeight = 50
+var brickPadding = 50
 var brickOffsetTop = 30
-var brickOffsetLeft = 30
+var brickOffsetLeft = 25
 var bricks = []
 for (var c = 0; c < brickColumnCount; c++) {
   bricks[c] = []
@@ -30,10 +35,14 @@ for (var c = 0; c < brickColumnCount; c++) {
   }
 }
 
-var score = 0
+var img = new Image();
+img.src = 'shrimp.png';
 
-document.addEventListener('keydown', keyDownHandler, false)
-document.addEventListener('keyup', keyUpHandler, false)
+// ENTRY POINT TO THE ACTION:
+img.onload = function () {
+    draw()
+}
+
 
 function drawBricks () {
   for (var c = 0; c < brickColumnCount; c++) {
@@ -43,11 +52,7 @@ function drawBricks () {
         var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop
         bricks[c][r].x = brickX
         bricks[c][r].y = brickY
-        ctx.beginPath()
-        ctx.rect(brickX, brickY, brickWidth, brickHeight)
-        ctx.fillStyle = colors[c % colors.length]
-        ctx.fill()
-        ctx.closePath()
+        ctx.drawImage(img, brickX, brickY, brickWidth, brickHeight);
       }
     }
   }
@@ -105,16 +110,18 @@ function drawBall () {
   ctx.fill()
   ctx.closePath()
 }
+
 function drawPaddle () {
   ctx.beginPath()
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight)
-  ctx.fillStyle = '#0095DD'
+  ctx.fillStyle = 'teal'
   ctx.fill()
   ctx.closePath()
 }
 
 function draw () {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
+
   drawBricks()
   drawBall()
   drawPaddle()
@@ -155,4 +162,4 @@ function draw () {
   requestAnimationFrame(draw)
 }
 
-draw()
+// draw()
