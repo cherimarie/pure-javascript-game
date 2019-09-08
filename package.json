@@ -1,0 +1,25 @@
+{
+  "name": "pure-js-game",
+  "version": "0.1.0",
+  "description": "Rudimentary game with Javascript & Node",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cherimarie/pure-javascript-game.git"
+  },
+  "author": "cheri marie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cherimarie/pure-javascript-game/issues"
+  },
+  "homepage": "https://github.com/cherimarie/pure-javascript-game#readme",
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "standard": "^14.1.0"
+  },
+  "dependencies": {
+  }
+}

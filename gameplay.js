@@ -1,6 +1,6 @@
 // use strict;
-const name = require('./modules/square.js')
-
+var { build } = require('./objectDefs/brick')
+build()
 var canvas = document.getElementById('myCanvas')
 var ctx = canvas.getContext('2d')
 
@@ -123,7 +123,6 @@ function drawPaddle () {
 
 function draw () {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
-  sup()
   drawBricks()
   drawBall()
   drawPaddle()
