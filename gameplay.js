@@ -1,6 +1,19 @@
+const startButton = document.getElementById('start')
+startButton.addEventListener('click', startGame)
+
+var img = new Image()
+
+function startGame(){
+  startButton.classList.add('hidden')
+  img.src = 'shrimp.png'
+
+  // ENTRY POINT TO THE ACTION:
+  img.onload = function () {
+    draw()
+  }
+}
 // use strict;
-var { build } = require('./objectDefs/brick')
-build()
+
 var canvas = document.getElementById('myCanvas')
 var ctx = canvas.getContext('2d')
 
@@ -38,13 +51,6 @@ for (var c = 0; c < brickColumnCount; c++) {
   }
 }
 
-var img = new Image()
-img.src = 'shrimp.png'
-
-// ENTRY POINT TO THE ACTION:
-img.onload = function () {
-  draw()
-}
 
 function drawBricks () {
   for (var c = 0; c < brickColumnCount; c++) {
